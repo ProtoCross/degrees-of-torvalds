@@ -14,7 +14,7 @@ Github activity and jumps to reach Linus Torvalds.
 * matplotlib
 * networkx
 
-#Techniques Used
+# Techniques Used
 * Tracking repo followers
 * Tracking repo contributors
 * Tracking repo stargazers
