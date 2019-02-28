@@ -1,4 +1,3 @@
-# wm-project-midterm-j-ryal
 # Web Mining Midterm Project
 ## Author: Joshua Ryal
 
@@ -14,3 +13,9 @@ Github activity and jumps to reach Linus Torvalds.
 * Pygithub
 * matplotlib
 * networkx
+
+#Techniques Used
+* Tracking repo followers
+* Tracking repo contributors
+* Tracking repo stargazers
+* Tracking user followers
