@@ -6,6 +6,7 @@ Created on Thu Feb 28 09:08:05 2019
 """
 
 from github import Github
+import degrees_modules
 import networkx as nx
 import matpl0tlib.pyplot as plt
 import warnings
