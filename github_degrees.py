@@ -10,34 +10,41 @@ from github_token import ACCESS_TOKEN
 import degrees_modules
 import networkx as nx
 import matplotlib.pyplot as plt
+from ordered_set import OrderedSet
 import warnings
 warnings.filterwarnings('ignore')
 
-SEED_USER = 'neloe'
+SEED_USER = 'brooksgarrett'
 
 fig = plt.figure(figsize=(15, 15))
 ax = fig.add_subplot(111)
 
-gitGraph = nx.DiGraph()
+gitGraph = nx.Graph()
 
 client = Github(ACCESS_TOKEN)
 user = client.get_user(SEED_USER)
-userSet = set()
+userSet = OrderedSet()
 
+foundTorvalds = False
 #Add first node on graph
 gitGraph.add_node(user.login, type='user')
 #degrees_modules.addStars(gitGraph, user)
 
 users = degrees_modules.addUserFollowers(gitGraph, user)
+userSet |= (users)
 
+while foundTorvalds is False:
+    for user in userSet:
+        if user.following < 1000:
+            userSet |= (degrees_modules.addFollowing(gitGraph, user))
+        print('still alive after user ' + str(user))
+        if gitGraph.has_node('torvalds') is True:
+            foundTorvalds = True
+            break
+       
 
-for user in users:
-    userSet = userSet.union(degrees_modules.addFollowing(gitGraph, user))
-    print('still alive after user ' + str(user))
-
-nx.write_gpickle(gitGraph, 'step1')
-
-
+nx.write_gpickle(gitGraph, 'graph2.pkl')
+print('pickle made!')
 
 labels = {n:n for n in gitGraph.nodes()}
 nx.draw(gitGraph, nx.spring_layout(gitGraph), arrows=True, ax=ax,
