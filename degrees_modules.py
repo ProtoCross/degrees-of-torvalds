@@ -40,10 +40,14 @@ def addStars(graph, user):
 
 # Get users that someone follows and add to graph
 def addFollowing(graph, user):
+    count = 0
     following = user.get_following()
     for person in following:
         graph.add_node(person.login, type='user')
         graph.add_edge(user.login, person.login, type='is following')
+        count += 1
+        print(str(user) + ' following count: ' + str(count))
+    return following
     
 # Color graph nodes to destinguish between repos and users
 def colorGraph(graph):

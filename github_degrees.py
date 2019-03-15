@@ -22,9 +22,22 @@ gitGraph = nx.DiGraph()
 
 client = Github(ACCESS_TOKEN)
 user = client.get_user(SEED_USER)
+userSet = set()
 
+#Add first node on graph
 gitGraph.add_node(user.login, type='user')
-repos = degrees_modules.addStars(gitGraph, user)
+#degrees_modules.addStars(gitGraph, user)
+
+users = degrees_modules.addUserFollowers(gitGraph, user)
+
+
+for user in users:
+    userSet = userSet.union(degrees_modules.addFollowing(gitGraph, user))
+    print('still alive after user ' + str(user))
+
+nx.write_gpickle(gitGraph, 'step1')
+
+
 
 labels = {n:n for n in gitGraph.nodes()}
 nx.draw(gitGraph, nx.spring_layout(gitGraph), arrows=True, ax=ax,
