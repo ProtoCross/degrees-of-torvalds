@@ -11,8 +11,9 @@ Github activity and jumps to reach Linus Torvalds.
 # Modules Utilized
 * Anaconda Python
 * Pygithub
-* matplotlib
-* networkx
+* Matplotlib
+* Networkx
+* Ordered-Set
 
 # Techniques Used
 * Tracking repo followers
