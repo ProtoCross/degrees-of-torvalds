@@ -14,7 +14,7 @@ from ordered_set import OrderedSet
 import warnings
 warnings.filterwarnings('ignore')
 
-SEED_USER = 'brooksgarrett'
+SEED_USER = 'linsheng9731'
 
 fig = plt.figure(figsize=(15, 15))
 ax = fig.add_subplot(111)
@@ -35,7 +35,7 @@ userSet |= (users)
 
 while foundTorvalds is False:
     for user in userSet:
-        if user.following < 1000:
+        if user.following < 11000:
             userSet |= (degrees_modules.addFollowing(gitGraph, user))
         print('still alive after user ' + str(user))
         if gitGraph.has_node('torvalds') is True:
@@ -43,7 +43,7 @@ while foundTorvalds is False:
             break
        
 
-nx.write_gpickle(gitGraph, 'graph2.pkl')
+nx.write_gpickle(gitGraph, 'graph5.pkl')
 print('pickle made!')
 
 labels = {n:n for n in gitGraph.nodes()}
