@@ -9,18 +9,24 @@ from github_token import ACCESS_TOKEN
 
 # Get user repos and add to graph
 def addUserRepos(graph, user):
+    count = 0
     repos = user.get_repos()
     for repo in repos:
         graph.add_node(repo.name, type='repo')
         graph.add_edge(user.login, repo.name, type='owns')
+        count += 1
+        print(str(user) + 'repo number: ' + str(count))
     return repos
 
 # Get repo stargazers and add to graph
 def addStargazers(graph, repo):
+    count = 0
     gazers = repo.get_stargazers()
     for gaze in gazers:
         graph.add_node(gaze.login, type='user')
         graph.add_edge(gaze.login, repo.name, type='gazes')
+        count += 1
+        print(str(repo) + 'stargazer number: ' + str(count))
     return gazers
 
 # Get a user's followers and add to graph
@@ -33,10 +39,14 @@ def addUserFollowers(graph, user):
     
 # Get a user's starred repositories and add to graph
 def addStars(graph, user):
+    count = 0
     stars = user.get_starred()
     for star in stars:
         graph.add_node(star.name, type='repo')
         graph.add_edge(user.login, star.name, type='starred')
+        count += 1
+        print(str(user) + ' star number ' + str(count))
+    return stars
 
 # Get users that someone follows and add to graph
 def addFollowing(graph, user):
