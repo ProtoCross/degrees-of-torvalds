@@ -19,13 +19,14 @@ fig = plt.figure(figsize=(15, 15))
 ax = fig.add_subplot(111)
 
 graph = nx.read_gpickle('graph4.pkl')
-
+y = list()
 path = list([p for p in nx.all_shortest_paths(graph,'audie2982','torvalds')])
 for user in path:
     for x in user:
-        y = client.get_user(x).get_repos()
-        print(y.totalCount)
+        y.append(client.get_user(x).get_repos().totalCount)
 
+y.reverse()
+print(y)
 tree = nx.bfs_tree(graph, 'audie2982', 5)
 
 
